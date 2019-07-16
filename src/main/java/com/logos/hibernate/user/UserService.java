@@ -1,9 +1,10 @@
 package com.logos.hibernate.user;
 
 import org.springframework.stereotype.Service;
+import org.w3c.dom.UserDataHandler;
 
 import javax.transaction.Transactional;
-import java.beans.Transient;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,11 +13,13 @@ import java.beans.Transient;
  * @since 2019-07-13 22:32
  */
 @Service
-public class UserService {
+public class UserService implements IUserService{
     private final UserRepository userRepository;
+    private final UserDtoRepository userDtoRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, UserDtoRepository userDtoRepository) {
         this.userRepository = userRepository;
+        this.userDtoRepository = userDtoRepository;
     }
 
     @Transactional
@@ -28,4 +31,8 @@ public class UserService {
         // return vo
         return user.toVo();
     };
+
+    public List<UserDto> getDto(){
+        return  userDtoRepository.findAll();
+    }
 }

@@ -1,9 +1,9 @@
 package com.logos.hibernate.web;
 
-import com.logos.hibernate.user.UserCreateParams;
-import com.logos.hibernate.user.UserService;
-import com.logos.hibernate.user.UserVo;
+import com.logos.hibernate.user.*;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,14 +15,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserService userService;
+    private final IUserService iUserService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController( IUserService iUserService) {
+        this.iUserService = iUserService;
     }
 
     @PostMapping("/")
     public UserVo create(@RequestBody UserCreateParams userCreateParams){
-        return userService.save(userCreateParams);
+        return iUserService.save(userCreateParams);
+    }
+
+
+    @GetMapping("/")
+    public List<UserDto> get(){
+        return iUserService.getDto();
     }
 }

@@ -14,4 +14,9 @@ public class UserCreateParams {
      * 所创建用户的用户名
      */
     private String name;
+    private String street;
+    private String zipCode;
+    private String billingStreet;
+    private String billingZipCode;
+
 }
